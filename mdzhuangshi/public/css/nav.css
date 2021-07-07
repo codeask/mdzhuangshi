@@ -1,0 +1,31 @@
+.nav_box {
+    overflow: hidden;
+    margin-bottom: 20px;
+}
+.nav_box .nav {
+    margin: 0 auto;
+    padding: 0;
+    width: 900px;
+    font-size: 22px;
+    overflow: hidden;
+}
+.nav_box .nav > li {
+    list-style: none;
+    text-align: center;
+    width: 225px;
+    float: left;
+}
+.nav_box .nav > li:hover {
+    background-color: orange;
+}
+.nav_box .nav > li:hover a {
+    color: white;
+}
+.nav_box .nav > li > a {
+    color: 	SlateGrey;
+    text-decoration: none;
+}
+.nav_box > .nav_btn {
+    margin-top: -25px;
+    float: right;
+}

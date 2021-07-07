@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>名雕装饰</title>
+    <link rel="stylesheet" href="./css/nav.css">
+
+    <style>
+        /* 设计团队简介渲染部分 */
+        .box {
+            width: 900px;
+            font-size: 14px;
+            margin: 10px auto;
+            color: #595757;
+        }
+        .box-head {
+            overflow: hidden;
+        }
+        .b-img {
+            width: 320px;
+            float: left;
+            margin-right: 50px;
+        }
+        .b-img img {
+            width: 320px;
+        }
+        .b-intro {
+            width: 500px;
+            float: left;
+        }
+        .b-intro h2 {
+            margin-top: 5px;
+        }
+        .b-intro .b-title {
+            font-weight: 700;
+        }
+        .b-intro button {
+            width: 100px;
+            height: 40px;
+            background-color: orange;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+        }
+        .box-content {
+            margin-top: 60px;
+        }
+        .designers-title h2 {
+            height: 35px;
+            border-bottom: 1px solid #ccc;
+        }
+        .designers-title h2 span {
+            display: inline-block;
+            height: 32px;
+            border-bottom: 3px solid orange;
+        }
+        .box-content .content-name {
+            display: inline-block;  
+            width: 85px;
+            font-weight: 700;
+        }
+        .box-content .content-desc {
+            display: inline-block;
+            width: 760px;
+            margin-left: 50px;
+        }
+        /* 设计团队作品渲染部分 */
+        .show-box {
+            width: 900px;
+            margin: 10px auto;
+            margin-top: 40px;
+            font-size: 14px;
+            overflow: hidden;
+        }
+        .prod-box .prod-item {
+            width: 270px;
+            float: left;
+            margin-right: 30px;
+        }
+        .prod-box .prod-item .img-box {
+            height: 190px;
+        }
+        .prod-box .prod-item img {
+            width: 270px;
+            height: 190px;
+
+        }
+        .prod-box .prod-item div {
+            text-align: center;
+        }
+        .prod-box .prod-item .item-style {
+            color: orange;
+        }
+        /* 团队设计师展示 */
+        .show-box .des-item {
+            width: 200px;
+            height: 315px;
+            float: left;
+            margin-right: 30px;
+            position: relative;
+            overflow: hidden;
+        }
+        .show-box .des-item:last-child {
+            margin-right: 0;    
+        }
+        .show-box .des-item:hover > .des-intr {
+            top: 0;
+        }
+        .show-box .des-item .des-intr {
+            width: 200px;   
+            height: 315px;
+            position: absolute;
+            top: 315px;
+            color: white;
+            font-size: 18px;
+            text-align: center;
+            background-color: rgba(63, 63, 63, 0.8);
+            transition: 0.3s ease-in-out;
+        }
+    </style>
+    <script>
+        // 设计团队简介渲染
+        function show1() {
+            var xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function() {
+                if(xhr.readyState == 4 && xhr.status == 200) {
+                    var r = xhr.responseText;
+                    var obj = JSON.parse(r);                //返回的字符串解析为对象
+                    var data = obj.data;
+                    var html = '';
+                    for(var i=0;i<obj.data.length;i++) {
+                        html +=
+                        `<div class = "box">
+                            <div class="box-head">
+                                <div class="b-img">
+                                    <img src="${data[i].dt_img}" alt="">
+                                </div>
+                                <div class = "b-intro">
+                                    <h2>${data[i].dtname}</h2>
+                                    <p class = "b-title">设计理念： </p>
+                                    <p class = "b-idea">${data[i].idea}</p>
+                                    <p>
+                                        <span class = "b-title">擅长风格： </span>
+                                        <span class = "b-style">${data[i].dtstyle}</span>
+                                    </p>
+                                    <p>
+                                        <span class = "b-title">服务楼盘： </span>
+                                        <span>${data[i].dtprod}</span>
+                                    </p> 
+                                    <button>立即预约</button>
+                                </div> 
+                            </div>
+                            <div class="box-content designers-title">
+                                <h2 class = "content-title"><span>团队概述</span></h2>
+                                <p>
+                                    <span class = "content-name">所属分公司：</span>
+                                    <span class = "content-desc">${data[i].dtbelong}</span>
+                                </p>
+                                <p>
+                                    <span class = "content-name">分公司地址：</span>
+                                    <span class = "content-desc">${data[i].com_site}</span>
+                                </p>
+                                <p>
+                                    <span class = "content-name">分公司简介：</span>
+                                    <span class = "content-desc">${data[i].com_intro}</span>
+                                </p>
+                                <p>
+                                    <span class = "content-name">所获荣耀： </span>
+                                    <span class = "content-desc">${data[i].dthonor}</span>
+                                </p>
+                            </div>
+                        </div>`
+                    }
+                    var d1 = document.getElementById('d1');
+                    d1.innerHTML = html;                //根据从数据库获取的数据刷新页面   
+                }
+            }
+            xhr.open("GET",`http://127.0.0.1:8080/pro/designers_teams${window.location.search}`,true);               //传递的参数通过地址栏的window.location.search获取
+            xhr.send();
+        }
+        //设计团队作品渲染
+        function show2() {
+            var xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function() {
+                if(xhr.readyState == 4 && xhr.status == 200) {
+                    var r = xhr.responseText;
+                    var obj = JSON.parse(r);                //返回的字符串解析为对象
+                    var data = obj.data;
+                    var html = '';
+                    html +=
+                    `<div class="prod-box show-box designers-title">
+                        <h2 class = "content-title"><span>设计作品</span></h2>
+                        <div class="prod-item">
+                            <div class = "img-box"><img src="${data[0].small_img}" alt=""></div>
+                            <div><span>${data[0].style}</span>-<span>${data[0].title}</span>-<span>${data[0].house_type}</span></div>
+                            <div>风格：<span class = "item-style">${data[0].style}&nbsp</span> 面积：<span>${data[0].area}</span>平米</div>
+                        </div>
+                        <div class="prod-item">
+                            <div class = "img-box"><img src="${data[1].small_img}" alt=""></div>
+                            <div><span>${data[1].style}</span>-<span>${data[1].title}</span>-<span>${data[1].house_type}</span></div>
+                            <div>风格：<span class = "item-style">${data[1].style}&nbsp</span> 面积：<span>${data[1].area}</span>平米</div>
+                        </div>
+                        <div class="prod-item">
+                            <div class = "img-box"><img src="${data[2].small_img}" alt=""></div>
+                            <div><span>${data[2].style}</span>-<span>${data[2].title}</span>-<span>${data[2].house_type}</span></div>
+                            <div>风格：<span class = "item-style">${data[2].style}&nbsp</span> 面积：<span>${data[2].area}</span>平米</div>
+                        </div> 
+                    </div>`
+
+                    var d2 = document.getElementById('d2');
+                    d2.innerHTML = html;                //根据从数据库获取的数据刷新页面   
+                }
+            }
+            xhr.open("GET",`http://127.0.0.1:8080/pro/designers_prod${window.location.search}`,true);               //传递的参数通过地址栏的window.location.search获取
+            xhr.send();
+        }
+        //团队设计师展示
+        function show3() {
+            var xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function() {
+                if(xhr.readyState == 4 && xhr.status == 200) {
+                    var r = xhr.responseText;
+                    var obj = JSON.parse(r);
+                    var data = obj.data;
+                    var html = '';
+                    html +=
+                    `
+                    <div class="show-box designers-title">
+                        <h2 class = "content-title"><span>全部设计师</span></h2>
+                        <div class="des-item">
+                            <img src="${data[0].dpic}" alt="">
+                            <div class="des-intr">
+                                <p>${data[0].dname}</p>
+                                <p>名雕装饰首席设计师</p>
+                            </div>
+                        </div>
+                        <div class="des-item">
+                            <img src="${data[1].dpic}" alt="">
+                            <div class="des-intr">
+                                <p>${data[1].dname}</p>
+                                <p>名雕装饰首席设计师</p>
+                            </div>
+                        </div>
+                        <div class="des-item">
+                            <img src="${data[2].dpic}" alt="">
+                            <div class="des-intr">
+                                <p>${data[2].dname}</p>
+                                <p>名雕装饰首席设计师</p>
+                            </div>
+                        </div>
+                        <div class="des-item">
+                            <img src="${data[3].dpic}" alt="">
+                            <div class="des-intr">
+                                <p>${data[3].dname}</p>
+                                <p>名雕装饰首席设计师</p>
+                            </div>
+                        </div>
+                    </div> 
+                    `
+                    var d3 = document.getElementById("d3");
+                    d3.innerHTML = html;
+                }
+            }
+            xhr.open("GET", `/pro/designers_list${window.location.search}`, true);
+            xhr.send();
+        }
+    </script>
+</head>
+<body onload = show1(),show2(),show3(),login_box()>
+    <!-- 顶部导航栏 -->
+    <nav class = "nav_box">
+        <ul class = "nav">
+             <li><a href = "case_list.html">经典案例</a></li>
+             <li><a href = "brand_state.html">品牌动态</a></li>
+             <li><a href = "designers_team.html">设计团队</a></li>
+             <li><a href = "client_est.html">客户心声</a></li>
+         </ul> 
+         <div class = "nav_btn">
+             <span id = "nav_login_name"></span>
+             <button  id = "nav_login_btn">登录</button>
+         </div>
+     </nav>
+
+    <div id="d1"></div>
+    <div id="d2"></div>
+    <div id="d3"></div>
+    <script type = "text/javascript" src = "./js/nav.js"></script>
+
+</body>
+</html>

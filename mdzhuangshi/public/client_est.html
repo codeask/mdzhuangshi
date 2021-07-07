@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">                  
+    <title>名雕装饰</title>
+    <link rel="stylesheet" href="./css/nav.css">
+
+    <style>
+        .mybox {
+            color: #595757;
+            width: 1100px;
+            margin: 0 auto;
+            overflow: hidden;
+            border-bottom: 1px solid #ccc;
+        }
+        .mybox_l {
+            width: 350px;
+            float: left;
+        }
+        .mybox_l  img {
+            width: 300px;
+        }
+        .mybox_r {
+            width: 700px;
+            float: right;
+        }
+        .mybox_r a {
+            color: #000;
+            text-decoration: none;
+        }
+    </style>
+    <script>
+        function show() {
+            var xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function() { 
+                if(xhr.readyState == 4 && xhr.status == 200) {
+                    var r = xhr.responseText;
+                    var str = JSON.parse(r);
+                    var data = str.data;                //获取路由器返回的数据
+                    var html = "";
+                    for(var i=0;i<data.length;i++) {
+                        html +=             //拼接模板字符串
+                        `<div class = "mybox" id = "${data[i].c_detail}">               
+                            <div class="mybox_l">
+                                <a href = "client_img.html?lid=${data[i].c_detail}"><img src="${data[i].c_smallimg}" alt=""></a>
+                            </div>
+                            <div class="mybox_r">
+                                <a href = "client_img.html?lid=${data[i].c_detail}"><h2>${data[i].c_title}</h2></a>
+                                <p>${data[i].c_desc}</p>
+                                <p>${data[i].c_time}</p>
+                            </div>
+                        </div>`
+                    }
+                    var d1 = document.getElementById('d1');
+                    d1.innerHTML = html;                //根据从数据库获取的数据刷新页面           
+                }
+            }
+            xhr.open("GET","http://127.0.0.1:8080/pro/client_est",true);
+            xhr.send();     
+        }
+        
+    </script>
+</head>
+<body onload = "show(),login_box()">
+<!-- 顶部导航栏 -->
+<nav class = "nav_box">
+    <ul class = "nav">
+         <li><a href = "case_list.html">经典案例</a></li>
+         <li><a href = "brand_state.html">品牌动态</a></li>
+         <li><a href = "designers_team.html">设计团队</a></li>
+         <li><a href = "client_est.html">客户心声</a></li>
+     </ul> 
+     <div class = "nav_btn">
+         <span id = "nav_login_name"></span>
+         <button  id = "nav_login_btn">登录</button>
+     </div>
+ </nav>
+
+    <div id="d1"></div>
+    <script type = "text/javascript" src = "./js/nav.js"></script>
+
+</body>
+</html>

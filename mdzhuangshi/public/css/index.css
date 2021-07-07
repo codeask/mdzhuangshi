@@ -1,0 +1,32 @@
+.container {
+    width: 900px;
+    color: #595757;
+    font-size: 14px;
+    margin: 0 auto;
+}
+.container .header {
+    overflow: hidden;
+}
+.container .header .header_logo {
+    float: left;
+    width: 198px;
+}
+.container .header .header_search {
+    float: left;
+    line-height: 64px;
+    margin-left: 20px;
+}
+.container .header .header_search span {
+    /* display: inline-block; */
+    height: 20px;
+    padding: 0 10px;
+}
+.container .header .header_search span.dw {
+
+    width: 50px;
+    background: url(./img/icon.jpg);
+    background-position: 10px 25px;
+}
+.container .header .header_phone {
+    float: left;
+}

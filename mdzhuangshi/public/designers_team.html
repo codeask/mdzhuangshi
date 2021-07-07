@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>名雕装饰</title>
+    <link rel="stylesheet" href="./css/nav.css">
+
+    <style>
+        a {
+            text-decoration: none;
+            color: black;
+        }
+        .box {
+            width: 870px;
+            /* margin: 30px 0 30px 30px; */
+            margin: 30px auto;
+            overflow: hidden;
+            color: #595757;
+        }
+        .box .img-box {
+            float: left;  
+            margin-right: 50px;  
+            /* width: 570px; */
+        }
+        .box .img-box img {
+            width: 570px;
+        }
+        .box h3 a:hover {
+            color: orange;
+        }
+        .box p {
+            font-size: 14px;
+        }
+        .box button {
+            background-color: orange;
+            border: none;
+            cursor: pointer;
+        }
+        .box button a {
+            color: white;
+        }
+    </style>
+    <script>
+        function show() {
+            var html = '';
+            var xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function() {
+                if(xhr.readyState == 4 && xhr.status == 200) {
+                    var r = xhr.responseText;
+                    var obj = JSON.parse(r);
+                    var data = obj.data;
+                    for(var i=0;i<data.length;i++) {
+                        html +=
+                        `<div class="box">
+                            <div class="img-box">
+                                <a href = "designers_teams.html?lid=${data[i].design_id}"><img src="${data[i].dt_img}" alt=""></a>
+                            </div>
+                            <h3><a href = "designers_teams.html?lid=${data[i].design_id}">${data[i].dtname}</a></h3>
+                            <p>${data[i].idea}</p>
+                            <button><a href = "designers_teams.html?lid=${data[i].design_id}">在线预约</a></button>
+                        </div>`;
+                    }
+                    var d1 = document.getElementById('d1');
+                    d1.innerHTML = html;
+                }
+            }
+            xhr.open('GET','http://127.0.0.1:8080/pro/designers_team',true);
+            xhr.send();
+        }
+    </script>
+</head>
+<body onload = show(),login_box()>
+    <!-- 顶部导航栏 -->
+    <nav class = "nav_box">
+        <ul class = "nav">
+             <li><a href = "case_list.html">经典案例</a></li>
+             <li><a href = "brand_state.html">品牌动态</a></li>
+             <li><a href = "designers_team.html">设计团队</a></li>
+             <li><a href = "client_est.html">客户心声</a></li>
+         </ul> 
+         <div class = "nav_btn">
+             <span id = "nav_login_name"></span>
+             <button  id = "nav_login_btn">登录</button>
+         </div>
+     </nav>
+
+    <div id="d1"></div>
+    <script type = "text/javascript" src = "./js/nav.js"></script>
+
+</body>
+</html>

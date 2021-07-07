@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>名雕装饰</title>
+    <link rel="stylesheet" href="./css/nav.css">
+
+    <style>
+        .container {
+            color: #595757;
+            width: 1000px;
+            margin: 30px auto;
+            overflow: hidden;
+        }
+        .container a {
+            text-decoration: none;
+
+        }
+        .left {
+            width: 300px;
+            height:220px;
+            float: left;
+            margin-right: 80px;
+        }
+        .left  img {
+            width: 100%;
+        }
+        .right {
+            
+            margin-left: 50px;
+        }
+        .right h3 a{
+            color: #7e7f81;
+        }
+        .right h3 a:hover {
+            color: orange;
+        }
+        .right_btn {
+            margin-top: 100px;
+        }
+        .right_btn button {
+            background-color: orange;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            margin-right: 400px;
+        }
+        .right_btn button a {
+            color: #fff;
+        }
+    </style>
+    <script>
+        function show() {
+            var xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function() { 
+                if(xhr.readyState == 4 && xhr.status == 200) {
+                    var r = xhr.responseText;
+                    var str = JSON.parse(r);
+                    var data = str.data;                //获取路由器返回的数据
+                    var html = "";
+                    for(var i=0;i<data.length;i++) {
+                        html +=             //拼接模板字符串
+                        `<div class = "container">
+                            <div class = "left">
+                                <a href = "brand_img.html?lid=${data[i].b_detail}"><img src="${data[i].img_url}" alt=""></a>
+                            </div>
+                            <div class = "right">
+                                <h3><a href = "brand_img.html?lid=${data[i].b_detail}">${data[i].b_title}</a></h3>
+                                <div class = "right_btn">
+                                    <button><a href = "brand_img.html?lid=${data[i].b_detail}">查看详情</a></button>
+                                    <span>${data[i].sub_time}</span>
+                                </div>  
+                            </div>
+                        </div>`
+                    }
+                    var d1 = document.getElementById('d1');
+                    d1.innerHTML = html;                //根据从数据库获取的数据刷新页面           
+                }
+            }
+            xhr.open("GET","http://127.0.0.1:8080/pro/brand_state",true);
+            xhr.send();     
+        }  
+    </script>
+</head>
+<body onload = show(),login_box()>
+    <!-- 顶部导航栏 -->
+    <nav class = "nav_box">
+        <ul class = "nav">
+             <li><a href = "case_list.html">经典案例</a></li>
+             <li><a href = "brand_state.html">品牌动态</a></li>
+             <li><a href = "designers_team.html">设计团队</a></li>
+             <li><a href = "client_est.html">客户心声</a></li>
+         </ul> 
+         <div class = "nav_btn">
+             <span id = "nav_login_name"></span>
+             <button  id = "nav_login_btn">登录</button>
+         </div>
+     </nav>
+    
+    <div id="d1"></div>
+    <script type = "text/javascript" src = "./js/nav.js"></script>
+
+</body>
+</html>

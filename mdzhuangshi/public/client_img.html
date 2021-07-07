@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>名雕装饰</title>
+    <link rel="stylesheet" href="./css/nav.css">
+
+    <style>
+        .show_box {
+            width: 600px;
+            margin: 0 auto;
+            color: #595757;
+        }
+        .show_box > img {
+            width: 600px;
+        }
+        p {
+            text-align: center;;
+        }
+    </style>
+    <script>
+        function show() {
+            var xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function() {
+                if(xhr.readyState == 4 && xhr.status == 200) {
+                    var r = xhr.responseText;
+                    var obj = JSON.parse(r);                //返回的字符串解析为对象
+                    var html = '';
+                    for(var i=0;i<obj.data.length;i++) {
+                        html +=
+                        `<div class = "show_box">
+                        <img src="${obj.data[i].img_url}" alt="">
+                        <p>${obj.data[i].img_desc}</p>
+                        </div>
+                        `
+                    }
+                    var d1 = document.getElementById('d1');
+                    d1.innerHTML = html;                //根据从数据库获取的数据刷新页面   
+                }
+            }
+            xhr.open("GET",`http://127.0.0.1:8080/pro/client_img${window.location.search}`,true);               //传递的参数通过地址栏的window.location.search获取
+            xhr.send();
+            
+        }
+    </script>
+</head>
+<body onload = show(),login_box()>
+    <!-- 顶部导航栏 -->
+    <nav class = "nav_box">
+        <ul class = "nav">
+             <li><a href = "case_list.html">经典案例</a></li>
+             <li><a href = "brand_state.html">品牌动态</a></li>
+             <li><a href = "designers_team.html">设计团队</a></li>
+             <li><a href = "client_est.html">客户心声</a></li>
+         </ul> 
+         <div class = "nav_btn">
+             <span id = "nav_login_name"></span>
+             <button  id = "nav_login_btn">登录</button>
+         </div>
+     </nav>
+
+    <div id="d1"></div>
+    <script type = "text/javascript" src = "./js/nav.js"></script>
+    
+</body>
+</html>

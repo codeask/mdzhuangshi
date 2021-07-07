@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- <link rel="stylesheet" href="./css/nav.css"> -->
+
+    <style>
+        .nav_box {
+            overflow: hidden;
+        }
+        .nav {
+            margin: 0 auto;
+            padding: 0;
+            width: 900px;
+            font-size: 22px;
+            overflow: hidden;
+        }
+        .nav > li {
+            list-style: none;
+            text-align: center;
+            width: 225px;
+            float: left;
+        }
+        .nav > li:hover {
+            background-color: orange;
+        }
+        .nav > li:hover a {
+            color: white;
+        }
+        .nav > li > a {
+            color: 	SlateGrey;
+            text-decoration: none;
+        }
+        .nav_box .nav_btn {
+            margin-top: -25px;
+            float: right;
+        }
+    </style>
+</head>
+<body>
+    <nav class = "nav_box">
+        <ul class = "nav">
+             <li><a href = "case_list.html">经典案例</a></li>
+             <li><a href = "brand_state.html">品牌动态</a></li>
+             <li><a href = "designers_team.html">设计团队</a></li>
+             <li><a href = "client_est.html">客户心声</a></li>
+         </ul> 
+         <div class = "nav_btn">
+             <span id = "nav_login_name"></span>
+             <button  id = "nav_login_btn">登录</button>
+         </div>
+     </nav>
+    
+    <script>
+        window.onload = function() {
+            let nav_login_name = document.getElementById("nav_login_name");
+            let nav_login_btn = document.getElementById("nav_login_btn");
+            
+            var xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function() {
+                if(xhr.readyState == 4 && xhr.status == 200) {
+                    var r = xhr.responseText;
+                    var obj = JSON.parse(r);                //返回的字符串解析为对象
+                    if(obj.code == 1) {
+                        nav_login_name.innerHTML = obj.data;
+                        nav_login_btn.innerHTML = "退出";
+                    } else {
+                        nav_login_name.innerHTML = "";
+                        nav_login_btn.innerHTML = "登录";
+                    }
+                }
+            }
+            // xhr.withCredentials = true;
+            xhr.open("GET",`http://127.0.0.1:8080/pro/isLogin`,true);               
+            xhr.send();
+
+            nav_login_btn.onclick = function() {
+                if(this.innerHTML == "登录") {              //为登录按钮绑定事件
+                    location.href = "http://127.0.0.1:8080/login.html";
+                } else if(this.innerHTML == "退出") {
+                    var xhr = new XMLHttpRequest();
+                    xhr.onreadystatechange = function() {
+                        if(xhr.readyState == 4 && xhr.status == 200) {
+                            var r = xhr.responseText;
+                            var obj = JSON.parse(r);                //返回的字符串解析为对象
+                            if(obj.code == 1) {
+                                alert("登录已退出");
+                                location.replace("http://127.0.0.1:8080/nav.html");
+                            } 
+                        }
+                    }
+                    xhr.open("GET",`http://127.0.0.1:8080/pro/exit`,true);               
+                    xhr.send();
+                }
+            }
+        }
+        
+       
+    </script>
+</body>
+</html>

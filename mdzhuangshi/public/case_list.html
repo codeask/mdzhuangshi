@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>名雕装饰</title>
+    <link rel="stylesheet" href="./css/nav.css">
+
+    <style>
+        * {
+            color: #595757;
+        }
+        ul {
+            margin: 0;
+            padding: 0;
+        }
+        .option_box {
+            width: 900px;
+            font-size: 14px;
+            color: #424242;
+            margin: 10px auto;
+        }
+        .option_box h3 {
+            color: orange;
+            font-weight: 500;
+        }
+        .option_box_line {
+            margin-top: 5px;
+            overflow: hidden;
+        }
+        .option_box_line span {
+            float: left;
+            width: 100px;
+            height: 40px;
+            background-color: #ccc;
+            text-align: center;
+            line-height: 40px;
+            margin-right: 20px;
+        }
+        .option_box_line ul {
+            list-style: none;
+            float: left;
+            height: 40px;
+            line-height: 40px;
+        } 
+        .option_box_line ul li {
+            float: left;
+            width: 75px;
+            height: 30px;
+            margin-right: 40px;
+        }
+        .option_box_line ul li button {
+            height: 30px;
+            border: none;
+            background-color: white;
+            cursor: pointer;
+        }
+        .option_box_line > ul > li:first-child > button {
+            cursor: default;
+            color: #424242;
+        }
+        .option_box_line > ul > li:first-child > button:hover {
+            color: #424242;
+        }
+        .option_box_line ul li button:hover {
+            color: orange;
+        }
+        .option_box_line ul li button.active {
+            background-color: orange;
+            color: white;
+        }
+        /* 搜索框 */
+        .search_box {
+            margin-top: 5px;
+        }
+        .search_box input {
+            width: 300px;
+            height: 30px;
+            padding-left: 6px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+        .search_box input:focus {
+            
+            outline: none;  
+            box-shadow: 0 0 2px  #00BFFF;
+        }
+        .search_box button {
+            width: 100px;
+            height: 30px;
+            background-color: orange;
+            border: none;
+            color: white;
+            cursor: pointer;
+        }
+        /* 案例展示区 */
+        .case_box {
+            width: 900px;
+            font-size: 14px;
+            color: #424242;
+            padding-left: 5px;
+            padding-bottom: 5px;
+            margin: 10px auto;
+            overflow: hidden;
+            cursor: pointer;
+        }
+        .case_box .case_item {
+            width: 275px;
+            float: left;
+            margin-right: 20px;
+            margin-top: 10px;
+            box-shadow: 0 0 4px #ccc;
+        }
+        .case_box .case_item:hover {
+            box-shadow: 0 0 8px yellowgreen;
+        }
+        .case_box .case_item .box_img {
+            height: 190px;
+        }
+        .case_box .case_item .box_img img{
+            width: 100%;
+            height: 100%;
+        }
+        .case_box .case_item > .box_intr {
+            text-align: center;
+            margin-bottom: 5px;
+        }
+        .case_box .case_item > button {
+            float: right;
+            border: none;
+            background: orange;
+            color: white;
+            cursor: pointer;
+            margin-right: 3px;
+            margin-bottom: 10px;
+        }
+        /* 底部按钮样式 */
+        .btn_box {
+            width: 100%;
+            text-align: center;
+        }
+        .btn_box > span {
+            width: 10ppx;
+        }
+        .btn_box > span > a {
+            display: inline-block;
+            width: 30px;
+            color: black;
+            margin-right: 10px;
+            text-decoration: none;
+            background-color: WhiteSmoke;
+        }
+        .btn_box > span > a.active {
+            background-color: Silver;
+        }
+    </style>
+    
+</head>
+<body onload = case_list(),login_box()>
+    <!-- 顶部导航栏 -->
+    <nav class = "nav_box">
+        <ul class = "nav">
+             <li><a href = "case_list.html">经典案例</a></li>
+             <li><a href = "brand_state.html">品牌动态</a></li>
+             <li><a href = "designers_team.html">设计团队</a></li>
+             <li><a href = "client_est.html">客户心声</a></li>
+         </ul> 
+         <div class = "nav_btn">
+             <span id = "nav_login_name"></span>
+             <button  id = "nav_login_btn">登录</button>
+         </div>
+     </nav>
+
+    <!-- 选项按钮区域 -->
+    <div class="option_box">
+        <h3>精品案例</h3>
+        <!-- 案例选项按钮第一行 -->
+        <div class="option_box_line">           
+            <span >案例风格</span>
+            <ul>
+                <li ><button class = "active" disabled>不限</button></li>
+                <li><button>欧式风格</button></li>
+                <li><button>现代简约</button></li>
+                <li><button>美式风格</button></li>
+                <li><button>中式风格</button></li>
+                <li><button>法式风格</button></li>
+            </ul>
+        </div>
+        <!-- 案例选项按钮第二行 -->
+        <div class="option_box_line">
+            <span >案例户型</span>
+            <ul>
+                <li ><button class = "active" disabled>不限</button></li>
+                <li><button>三居室</button></li>
+                <li><button>四居室</button></li>
+                <li><button>五居室</button></li>
+            </ul>
+        </div>
+        <!-- 案例选项按钮第三行 -->
+        <div class="option_box_line">
+            <span >案例面积</span>
+            <ul>
+                <li><button class = "active" disabled>不限</button></li>
+                <li><button>121-180㎡</button></li>
+                <li><button>181-240㎡</button></li>
+                <li><button>241-300㎡</button></li>
+            </ul>
+        </div>
+        <!-- 案例选项中的搜索行 -->
+        <form class = "search_box">
+            <input type = "text" placeholder = "请输入关键字" onkeydown = key_search()>
+            <!-- <input type = "text" style = "display: none;"> -->
+            <button type = "button" onclick = btn_search()>搜索</button>
+            <button type = "button" onclick = btn_reset()>重置</button>
+        </form>
+    </div>
+    <!-- 案例展示区域 -->
+    <div class="case_box" id = "case_box"></div>
+    <!-- 底部翻页按钮 -->
+    <div class = "btn_box" >
+        <span id= "btn_box">
+            
+        </span>
+    </div>
+
+    <script>
+        function case_list(pageNum) {              //初始页面加载函数
+            var xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function() {
+                if(xhr.readyState == 4 && xhr.status == 200) {
+                    var r = xhr.responseText;
+                    var obj = JSON.parse(r);
+                    var datas = obj.data;
+                    var html = '';
+                    for(let data of datas) {
+                        html += 
+                        `
+                        <div class="case_item" onclick = "window.open('http://127.0.0.1:8080/case_item.html?listid=${data.img_detail}','_self')  ">           
+                            <div class = "box_img"><img src="${data.small_img}" alt=""></div>
+                            <div class = "box_intr"><span>${data.style}</span>-<span>${data.title}</span>-<span>${data.house_type}</span></div>
+                            <button>装修预约</button>
+                        </div>
+                        `
+                    }
+                    var case_box = document.getElementById("case_box");
+                    case_box.innerHTML = html;
+                    
+                    pageNum = parseInt( obj.page );         //底下按钮部分
+                    var count = parseInt( obj.count );
+                    var btn_html = "";
+                    if( (pageNum -1) > 0) {
+                        btn_html += `<a href = "javascript:;">${pageNum-1}</a>`
+                    }
+                    btn_html += `<a href = "javascript:;" class = "active">${pageNum}</a>`
+                    if( pageNum < count) {
+                        btn_html += `<a href = "javascript:;">${pageNum+1}</a>`
+                    }
+                    if(( pageNum ==1 ) && (( pageNum + 2 ) < count )) {
+                        btn_html += `<a href = "javascript:;">${pageNum+2}</a>`
+
+                    }
+                    if( (pageNum + 1) < count ) {
+                        btn_html += `...<a href = "javascript:;">${count}</a>`
+                    }
+
+                    var btn_box = document.getElementById("btn_box");
+                    btn_box.innerHTML = btn_html;
+
+                    var a_btn = btn_box.getElementsByTagName("a");          //给每个按钮绑定单击事件
+                    for(let a of a_btn) {
+                        a.onclick = function() {
+                            pageNum = this.textContent;
+                            case_list(pageNum);
+                        }
+                    }
+                }
+            }
+            xhr.open("GET", `/pro/case_all?pageNum=${pageNum}`, "true");
+            xhr.send();
+
+            let uls = document.querySelectorAll(".option_box_line > ul");              //上部按钮背景切换
+            for(let ul of uls) {
+                let lis = ul.getElementsByTagName("li");
+                for(let li of lis) {
+                    li.onclick = function() {               //给所有按钮绑定点击时间
+                        for(let li of lis) {
+                            li.firstElementChild.className = "";            //清除之前被选中的选项
+                        }
+                        this.firstElementChild.className = "active";
+                        //let active = document.getElementsByClassName("active");             //查找并返回触发按钮中的内容
+                        // btn_query(active[0].textContent, active[1].textContent, active[2].textContent)
+                    }
+                }
+            }
+
+
+            function btn_query({style, house_type, area, pageNum}) {               //选项按钮点击函数
+                var xhr = new XMLHttpRequest();
+                xhr.onreadystatechange = function() {
+                    if(xhr.readyState == 4 && xhr.status == 200) {
+                        var r = xhr.responseText;
+                        var obj = JSON.parse(r);
+                        var data = obj.data;
+                        var html = "";
+                        if(data.length == 0) {
+                            html = `<h2>抱歉，没有搜索到结果...</h2>`;                //没有搜索结果的情况   
+                        }
+                        for(let o of data) {
+                            html += 
+                            `<div class="case_item" onclick = "window.open('http://127.0.0.1:8080/case_item.html?listid=${o.img_detail}','_self')  ">           
+                                <div class = "box_img"><img src="${o.small_img}" alt=""></div>
+                                <div class = "box_intr"><span>${o.style}</span>-<span>${o.title}</span>-<span>${o.house_type}</span></div>
+                                <button>装修预约</button>
+                            </div>`
+                        }
+                        var case_box = document.getElementById("case_box");
+                        case_box.innerHTML = html;
+
+                        pageNum = parseInt( obj.page );         //底下按钮部分
+                        var count = parseInt( obj.count );
+                        var btn_html = "";
+                        if( (pageNum -1) > 0) {
+                            btn_html += `<a href = "javascript:;">${pageNum-1}</a>`
+                        }
+                        btn_html += `<a href = "javascript:;" class = "active">${pageNum}</a>`
+                        if( pageNum < count) {
+                            btn_html += `<a href = "javascript:;">${pageNum+1}</a>`
+                        }
+                        if(( pageNum ==1 ) && (( pageNum + 2 ) < count )) {
+                            btn_html += `<a href = "javascript:;">${pageNum+2}</a>`
+
+                        }
+                        if( (pageNum + 1) < count ) {
+                            btn_html += `...<a href = "javascript:;">${count}</a>`
+                        }
+
+                        var btn_box = document.getElementById("btn_box");
+                        btn_box.innerHTML = btn_html;
+
+                        var a_btn = btn_box.getElementsByTagName("a");          //给每个按钮绑定单击事件
+                        for(let a of a_btn) {
+                            a.onclick = function() {
+                                pageNum = this.textContent;
+                                btn_query({style, house_type, area, pageNum});
+                            }
+                        }
+                    }
+                }
+                xhr.open("POST", '/pro/case_list_filter', 'true');
+                xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+                xhr.send(`style=${style}&house_type=${house_type}&area=${area}&pageNum=${pageNum}`);
+            }
+            
+
+            let style = house_type = area = "";
+            let lis_style = uls[0].getElementsByTagName("li");              //顶部第一行按钮绑定事件
+            for(let i = 1; i < lis_style.length; i++) {
+                lis_style[i].addEventListener("click", function() {
+                    style = lis_style[i].textContent;
+                    btn_query({style: style, house_type: house_type, area: area, pageNum: pageNum});
+                })
+            }
+            let lis_house = uls[1].getElementsByTagName("li");              //顶部第二行按钮绑定事件
+            for(let i = 1; i < lis_house.length; i++) {
+                lis_house[i].addEventListener("click", function() {
+                    house_type = lis_house[i].textContent;
+                    btn_query({style: style, house_type: house_type, area: area, pageNum: pageNum});
+                })
+            }
+            let lis_area = uls[2].getElementsByTagName("li");               //顶部第三行按钮绑定事件
+            for(let i = 1; i < lis_area.length; i++) {
+                lis_area[i].addEventListener("click", function() {
+                    area = lis_area[i].textContent;
+                    btn_query({style: style, house_type: house_type, area: area, pageNum: pageNum});
+                })
+            }
+            function filter_btn(pageNum) {
+                console.log("aa");
+                btn_query({style: style, house_type: house_type, area: area, pageNum: pageNum});
+            }    
+        }
+
+
+
+        function btn_search() {             //搜索按钮
+                let input = document.querySelector(".search_box > input");
+                var xhr = new XMLHttpRequest();
+                xhr.onreadystatechange = function() {
+                    if(xhr.readyState == 4 && xhr.status == 200) {
+                        var r = xhr.responseText;
+                        var obj = JSON.parse(r);
+                        var html = "";
+                        if(obj.length == 0) {
+                            html = `<h2>抱歉，没有搜索到结果...</h2>`;                //没有搜索结果的情况
+                        }
+                        for(let o of obj) {
+                            html += 
+                            `<div class="case_item" onclick = "window.open('http://127.0.0.1:8080/case_item.html?listid=${o.img_detail}','_self')  ">           
+                                <div class = "box_img"><img src="${o.small_img}" alt=""></div>
+                                <div class = "box_intr"><span>${o.style}</span>-<span>${o.title}</span>-<span>${o.house_type}</span></div>
+                                <button>装修预约</button>
+                            </div>`
+                        }
+                        var case_box = document.getElementById("case_box");
+                        case_box.innerHTML = html;
+                    }
+                }
+                xhr.open("POST", '/pro/case_list_search', 'true');
+                xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+                xhr.send(`input=${input.value}`);
+            }
+        function btn_reset() {              //重置按钮
+            location.reload();
+        }
+        function key_search() { 
+            if(event.keyCode == 13) {
+            event.preventDefault();            //按下enter键搜索
+
+                btn_search();
+            }
+        }
+        
+    </script>
+    <script type = "text/javascript" src = "./js/nav.js"></script>
+
+</body >
+</html>

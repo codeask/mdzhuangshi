@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>注册页面</title>
+</head>
+<style>
+    .login_box {
+        color: #595757;
+        width: 300px;
+        margin: 100px auto;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        padding: 10px;
+    }
+    .login_box >h3 {
+        text-align: center;
+    }
+    .login_box input {
+        height: 22px;
+    }
+    .login_box > div {
+        margin: 20px 0 20px 0;
+    }
+    .login_box > div > span:first-child {
+        display: inline-block;
+        width: 80px;
+    }
+    .login_box > div .uname_tip, 
+    .login_box > div .upwd_tip,
+    .login_box > div .upwd_tip2 {
+        display: inline-block;
+        vertical-align: bottom;
+        width: 25px;
+        height: 25px;
+        /* background-color: red; */
+    }
+    .login_box .auth {
+        width: 200px;
+        height: 170px;
+        /* border: 1px solid #ccc; */
+        margin: 0 auto;
+    }
+    .login_box .auth .auth_pic {
+        height: 100px;
+        /* background: red; */
+    }
+    .login_box .auth .auth_tip {
+        color: red;
+    }
+    .login_box .auth .auth_ans input {
+        width: 192px;
+        margin: 10px 0 4px 0;
+    }
+    .login_box > p {
+        text-align: center;
+    }
+    .login_box > p > button {
+        width: 70px;
+        height: 30px;
+    }
+</style>
+<body>
+    <div class = "login_box">
+        <h3><span>注册</span></h3>
+        <div><span>用户名：</span><input id = "uname" type = "text" placeholder="请输入用户名">&nbsp<span id = "uname_tip" class = "uname_tip"></span></div>
+        <div><span>密码：</span><input id = "upwd" type = "password" placeholder="请输入密码">&nbsp<span class = "upwd_tip"></span></div>
+        <div><span>确认密码：</span><input id = "upwd2" type = "password" placeholder="请输入密码">&nbsp<span class = "upwd_tip2"></span></div>
+
+        <div class = "auth">
+            <div class = "auth_pic"><img src = "http://127.0.0.1:8080/pro/code" id = "code2"></div>
+            <div class = "auth_ans">
+                <input id = "code" type = "text" placeholder="请输入答案">
+            </div>
+            <div class = "auth_tip"></div>
+        </div>
+        <p><button>注册</button></p>
+    </div>
+
+    <script>
+        var exName = false;
+        var btn = document.querySelector(".login_box button");          //点击注册
+        btn.onclick = function() { 
+            if(!exName) {
+                alert("用户名不可用");
+                return;
+            }             
+            var uname = document.getElementById("uname");
+            var upwd = document.getElementById("upwd");
+            var upwd2 = document.getElementById("upwd2");
+            var code = document.getElementById("code").value;
+
+            var tip = document.getElementById("tip");
+            if(upwd2.value == upwd.value) {             //先比较两个密码框是否相同
+                var xhr = new XMLHttpRequest();
+                xhr.onreadystatechange = function() {
+                    if(xhr.readyState == 4 && xhr.status == 200) {
+                        var r = xhr.responseText;
+                        var obj = JSON.parse(r);
+                        if(obj.code == 1) {
+                            alert("注册成功");
+                            location.replace("http://127.0.0.1:8080/login.html");               //注册成功后跳转到登录页面
+                        } else if(obj.code == -1) {
+                            alert("验证码错误");
+                            return;
+                        } else {
+                            alert("注册失败");
+                            return;
+                        }
+                    }
+                }
+                xhr.open('POST', '/pro/register', true)
+                xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+                xhr.send(`uname=${uname.value}&upwd=${upwd}&code=${code}`);
+            } else {
+                tip.innerHTML = "两次输入密码不一致";           //底部提示框提示
+            }
+        }
+
+        var uname = document.getElementById("uname");              //验证用户名是否存在
+        uname.onblur = function() {
+            if(uname.value != "") {
+                var xhr = new XMLHttpRequest();
+                xhr.onreadystatechange = function() {
+                    if(xhr.readyState == 4 && xhr.status == 200) {
+                        var r = xhr.responseText;
+                        var obj = JSON.parse(r);
+                        if(obj.code == 1) {
+                            alert("用户名不可用");
+                            return;
+                        } else {
+                            var uname_tip = document.getElementById("uname_tip");           //用户名可用更换右侧图标
+                            uname_tip.setAttribute("style", "background-image: url('./img/ok.png'); background-repeat: no-repeat;");
+                            exName = true;
+                            return;
+                        }
+                    }
+                }
+                xhr.open('GET', `/pro/exists?uname=${uname.value}`, true)
+                xhr.send();
+            }
+        }
+
+    </script>
+</body>
+</html>
