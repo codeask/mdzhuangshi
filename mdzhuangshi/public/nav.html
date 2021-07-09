@@ -79,7 +79,7 @@
 
             nav_login_btn.onclick = function() {
                 if(this.innerHTML == "登录") {              //为登录按钮绑定事件
-                    location.href = "http://127.0.0.1:8080/login.html";
+                    location.href = "login.html";
                 } else if(this.innerHTML == "退出") {
                     var xhr = new XMLHttpRequest();
                     xhr.onreadystatechange = function() {
@@ -88,7 +88,7 @@
                             var obj = JSON.parse(r);                //返回的字符串解析为对象
                             if(obj.code == 1) {
                                 alert("登录已退出");
-                                location.replace("http://127.0.0.1:8080/nav.html");
+                                location.replace("nav.html");
                             } 
                         }
                     }

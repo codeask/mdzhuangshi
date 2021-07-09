@@ -16,7 +16,7 @@
             padding: 0;
         }
         .option_box {
-            width: 900px;
+            width: 1100px;
             font-size: 14px;
             color: #424242;
             margin: 10px auto;
@@ -96,7 +96,7 @@
         }
         /* 案例展示区 */
         .case_box {
-            width: 900px;
+            width: 1100px;
             font-size: 14px;
             color: #424242;
             padding-left: 5px;
@@ -108,8 +108,9 @@
         .case_box .case_item {
             width: 275px;
             float: left;
-            margin-right: 20px;
-            margin-top: 10px;
+            margin-right: 70px;
+            margin-left: 20px;
+            margin-top: 30px;
             box-shadow: 0 0 4px #ccc;
         }
         .case_box .case_item:hover {
@@ -170,6 +171,7 @@
              <span id = "nav_login_name"></span>
              <button  id = "nav_login_btn">登录</button>
          </div>
+       
      </nav>
 
     <!-- 选项按钮区域 -->
@@ -308,7 +310,7 @@
                         }
                         for(let o of data) {
                             html += 
-                            `<div class="case_item" onclick = "window.open('http://127.0.0.1:8080/case_item.html?listid=${o.img_detail}','_self')  ">           
+                            `<div class="case_item" onclick = "window.open('case_item.html?listid=${o.img_detail}','_self')  ">           
                                 <div class = "box_img"><img src="${o.small_img}" alt=""></div>
                                 <div class = "box_intr"><span>${o.style}</span>-<span>${o.title}</span>-<span>${o.house_type}</span></div>
                                 <button>装修预约</button>
@@ -396,7 +398,7 @@
                         }
                         for(let o of obj) {
                             html += 
-                            `<div class="case_item" onclick = "window.open('http://127.0.0.1:8080/case_item.html?listid=${o.img_detail}','_self')  ">           
+                            `<div class="case_item" onclick = "window.open('case_item.html?listid=${o.img_detail}','_self')  ">           
                                 <div class = "box_img"><img src="${o.small_img}" alt=""></div>
                                 <div class = "box_intr"><span>${o.style}</span>-<span>${o.title}</span>-<span>${o.house_type}</span></div>
                                 <button>装修预约</button>

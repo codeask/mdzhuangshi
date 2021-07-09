@@ -4,8 +4,11 @@
     font-size: 14px;
     margin: 0 auto;
 }
+/* header样式 */
 .container .header {
+    width: 900px;
     overflow: hidden;
+    margin-bottom: 10px;
 }
 .container .header .header_logo {
     float: left;
@@ -17,16 +20,87 @@
     margin-left: 20px;
 }
 .container .header .header_search span {
-    /* display: inline-block; */
+    display: inline-block;
+    width: 20px;
     height: 20px;
-    padding: 0 10px;
 }
-.container .header .header_search span.dw {
-
-    width: 50px;
-    background: url(./img/icon.jpg);
-    background-position: 10px 25px;
+.container .header .header_search div {
+    float: left;
+    width: 100px;
+    text-align: center;
+}
+.container .header .header_search div:first-child {
+    width: 70px;
+}
+.container .header .header_search .header_option {
+    cursor: pointer;
+}
+.container .header .header_search .divide {
+    width: 1px;
+}
+.container .header .header_search .option_item:hover {
+    color: orange;
+}
+.container .header .header_search .option_item:hover > span {
+    background: url("../img/icon.jpg") no-repeat -422px -9px;
+}
+.container .header .header_search .location_icon {
+    background: url("../img/icon.jpg") no-repeat -146px -12px;    
+}
+.container .header .header_search .down_icon {
+    background: url("../img/icon.jpg") no-repeat -352px -9px;
 }
 .container .header .header_phone {
     float: left;
+}
+/* 搜索框部分 */
+.container .header .header_search .search_box {
+    width: 203px;
+    height: 64px;
+    line-height: 64px;
+    float: left;
+    
+}
+.container .header .header_search .search_box .input_box {
+    height: 25px;
+    border: 1px solid orange;   
+}
+.container .header .header_search .search_box .input_box:focus {
+    outline: none;
+}
+.container .header .header_search .search_box .search_icon {
+    display: inline-block;
+    width: 33px;
+    height: 30px;
+    vertical-align: middle;
+    cursor: pointer;
+    background: orange url("../img/search.png") no-repeat -18px -18px ;
+    margin-top: -2px;
+    margin-left: -4px;
+    border-radius: 3px;
+}
+/* 右侧电话 */
+.container .header .header_phone {
+    width: 200px;
+}
+.container .header .header_phone span {
+    display: inline-block;
+    float: left;
+    width: 36px;
+    height: 50px;
+    background: url("../img/icon.jpg") no-repeat -208px 8px;
+    margin-left: 15px;
+}
+.container .header .header_phone div {
+    float: left;
+    margin-top: -5px;
+}
+.container .header .header_phone .phone_title {
+    margin-bottom: 5px;
+}
+.container .header .header_phone .phone_number {
+    color: orange;
+    font-size: 22px;
+    font-style: italic;
+    margin: 0;
 }

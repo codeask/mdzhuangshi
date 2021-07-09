@@ -70,7 +70,7 @@
         <div><span>确认密码：</span><input id = "upwd2" type = "password" placeholder="请输入密码">&nbsp<span class = "upwd_tip2"></span></div>
 
         <div class = "auth">
-            <div class = "auth_pic"><img src = "http://127.0.0.1:8080/pro/code" id = "code2"></div>
+            <div class = "auth_pic"><img src = "/pro/code" id = "code2"></div>
             <div class = "auth_ans">
                 <input id = "code" type = "text" placeholder="请输入答案">
             </div>
@@ -101,7 +101,7 @@
                         var obj = JSON.parse(r);
                         if(obj.code == 1) {
                             alert("注册成功");
-                            location.replace("http://127.0.0.1:8080/login.html");               //注册成功后跳转到登录页面
+                            location.replace("login.html");               //注册成功后跳转到登录页面
                         } else if(obj.code == -1) {
                             alert("验证码错误");
                             return;

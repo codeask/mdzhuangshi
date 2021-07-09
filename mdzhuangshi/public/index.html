@@ -6,21 +6,49 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>名雕装饰</title>
     <link rel="stylesheet" href="./css/index.css">
+    <link rel="stylesheet" href="./css/nav.css">
+
 </head>
 <body>
     <div class="container">
         <!-- header部分 -->
         <header class = "header">
             <div class="header_logo">
-                <img src="./img/logo.png" alt="">
+                <a href = "index.html"><img src="./img/logo.png" alt=""></a>
             </div>
             <div class = "header_search">
-                <span class = "dw">全国</span>
-                <span>切换城市</span>
-                <span>旗下品牌</span>
+
+                <div class = "header_option"><span class = "location_icon"></span>全国</div>
+                <div class = "divide">|</div>
+                <div class = "header_option option_item">切换城市<span class = "down_icon"></span></div>
+                <div class = "divide">|</div>
+                <div class = "header_option option_item">旗下品牌<span class = "down_icon"></span></div>
+                <div class = "search_box">
+                    <input class = "input_box" type = "text" placeholder = "请输入装修风格"><span class = "search_icon" ></span>
+                </div>
             </div>
-            <div class = "header_phone"></div>
+            <div class = "header_phone">
+                <span></span>
+                <div>
+                    <p class = "phone_title">24小时咨询电话</p>
+                    <p class = "phone_number">400-062-2282</p>
+                </div>
+                
+            </div>
         </header>
+        <!-- 顶部导航栏 -->
+        <nav class = "nav_box">
+            <ul class = "nav">
+                <li><a href = "case_list.html">经典案例</a></li>
+                <li><a href = "brand_state.html">品牌动态</a></li>
+                <li><a href = "designers_team.html">设计团队</a></li>
+                <li><a href = "client_est.html">客户心声</a></li>
+            </ul> 
+            <!-- <div class = "nav_btn">
+                <span id = "nav_login_name"></span>
+                <button  id = "nav_login_btn">登录</button>
+            </div> -->
+        </nav>
     </div>
     
 </body>

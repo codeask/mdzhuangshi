@@ -72,7 +72,7 @@
             </div>
             <div class = "auth_tip"></div>
         </div>
-        <p><button class = "login">登录</button><button class = "register">注册</button></p>
+        <p><button class = "register">注册</button><button class = "login">登录</button></p>
         
     </div>
 
@@ -91,7 +91,7 @@
                     var obj = JSON.parse(r);
                     if(obj.code == 1) {
                         alert("登录成功");
-                        location.href = "http://127.0.0.1:8080/case_list.html"
+                        location.href = "case_list.html"
                     } else if(obj.code = -1) {
                         alert("验证码错误");
                     } else {
@@ -104,7 +104,7 @@
             xhr.send(`uname=${uname.value}&upwd=${upwd.value}&code=${code}`);
         }
         btn_register.onclick = function() {
-            location.replace("http://127.0.0.1:8080/register.html");
+            location.replace("register.html");
         }
     </script>
     <script type = "text/javascript" src = "./js/nav.js"></script>
